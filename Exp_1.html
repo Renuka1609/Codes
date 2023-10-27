@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Area Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            margin: 0 auto;
+            width: 300px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        p {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Geometric Shape Area Calculator</h1>
+
+    <form>
+        <h2>Rectangle</h2>
+        Length: <input type="number" id="rectLength" step="0.01"><br>
+        Width: <input type="number" id="rectWidth" step="0.01"><br>
+        <button type="button" onclick="calculateRectangleArea()">Calculate Rectangle Area</button>
+        <p id="rectangleResult"></p>
+
+        <h2>Circle</h2>
+        Radius: <input type="number" id="circleRadius" step="0.01"><br>
+        <button type="button" onclick="calculateCircleArea()">Calculate Circle Area</button>
+        <p id="circleResult"></p>
+        <h2>Triangle</h2>
+        Side A: <input type="number" id="triSideA" step="0.01"><br>
+        Side B: <input type="number" id="triSideB" step="0.01"><br>
+        Side C: <input type="number" id="triSideC" step="0.01"><br>
+        <button type="button" onclick="calculateTriangleArea()">Calculate Triangle Area</button>
+        <p id="triangleResult"></p>
+    </form>
+
+    <script>
+      
+        function calculateRectangleArea() {
+            const length = parseFloat(document.getElementById("rectLength").value);
+            const width = parseFloat(document.getElementById("rectWidth").value);
+            const resultElement = document.getElementById("rectangleResult");
+            if (isNaN(length) || isNaN(width) || length <= 0 || width <= 0) {
+                resultElement.textContent = "Invalid input: Length and width must be positive numbers.";
+            } else {
+                const area = length * width;
+                resultElement.textContent = "Rectangle Area: " + area;
+            }
+        }
+
+        function calculateCircleArea() {
+            const radius = parseFloat(document.getElementById("circleRadius").value);
+            const resultElement = document.getElementById("circleResult");
+            if (isNaN(radius) || radius <= 0) {
+                resultElement.textContent = "Invalid input: Radius must be a positive number.";
+            }
+            else {
+                const area = Math.PI * Math.pow(radius, 2);
+                resultElement.textContent = "Circle Area: " + area;
+            }
+        }
+
+        function calculateTriangleArea() {
+            const sideA = parseFloat(document.getElementById("triSideA").value);
+            const sideB = parseFloat(document.getElementById("triSideB").value);
+            const sideC = parseFloat(document.getElementById("triSideC").value);
+            const resultElement = document.getElementById("triangleResult");
+
+            if (sideA <= 0 || sideB <= 0 || sideC <= 0 || sideA + sideB <= sideC || sideA + sideC <= sideB || sideB + sideC <= sideA) {
+                resultElement.textContent = "Invalid input: The sides do not form a valid triangle.";
+            } else {
+                const s = (sideA + sideB + sideC) / 2;
+                const area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
+                resultElement.textContent = "Triangle Area: " + area;
+            }
+        }
+
+    </script>
+</body>
+</html>

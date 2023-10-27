@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Operations</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        label[id^="result"] {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>String Operations</h1>
+    
+    <label for="inputString">Enter a string:</label>
+    <input type="text" id="inputString">
+    <br>
+    <label for="resultReverse">Reversed String:</label>
+    <label id="resultReverse"></label>
+    <br>
+    <button onclick="reverseString()">Reverse</button>
+    <br>
+    <br>
+    <label for="resultPalindrome">Palindrome:</label>
+    <label id="resultPalindrome"></label>
+    <br>
+    <button onclick="checkPalindrome()">Check Palindrome</button>
+    <br>
+    <br>
+    <label for="replaceChar">Replace Character:</label>
+    <input type="text" id="replaceChar">
+    
+    <label for="newChar">With:</label>
+    <input type="text" id="newChar">
+    <br>
+    <br>
+    <button onclick="replaceCharacter()">Replace</button>
+    <br>
+    <label for="resultReplace">Replaced String:</label>
+    <label id="resultReplace"></label>
+
+    <script>
+        function reverseString() {
+            const inputString = document.getElementById('inputString').value;
+
+            if (inputString.length == 0) {
+                document.getElementById('resultReverse').textContent = "Please Enter a valid string";
+            } else {
+                const reversedString = inputString.split('').reverse().join('');
+                document.getElementById('resultReverse').textContent = reversedString;
+            }
+        }
+
+        function checkPalindrome() {
+            const inputString = document.getElementById('inputString').value;
+            const reversedString = inputString.split('').reverse().join('');
+            const isPalindrome = inputString === reversedString;
+            document.getElementById('resultPalindrome').textContent = isPalindrome ? 'Yes, The string is a palindrome' : 'No, The string is not a palindrome';
+        }
+
+        function replaceCharacter() {
+            const inputString = document.getElementById('inputString').value;
+            const charToReplace = document.getElementById('replaceChar').value;
+            const newChar = document.getElementById('newChar').value;
+
+            if (inputString.indexOf(charToReplace) === -1) {
+                document.getElementById('resultReplace').textContent = 'Character not present';
+            } else {
+                const replacedString = inputString.replace(new RegExp(charToReplace, 'g'), newChar);
+                document.getElementById('resultReplace').textContent = replacedString;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array and Object Operations</title>
+
+    <style>
+       
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid pink;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: lightslategray;
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+    <h2>Array and Object Operations</h2>
+
+    <label for="arrayLengthInput">Enter length of array:</label>
+    <input type="number" id="arrayLengthInput">
+    <br><br>
+
+    <label for="objectArrayInput">Enter an array/object:</label>
+    <input type="text" id="objectArrayInput"><br><br>
+    <button onclick="addObjectOrArray()">Add Element</button>
+    <br><br>
+
+    <label for="isArrayIndex">Enter an index:</label>
+    <input type="number" id="isArrayIndex"><br><br>
+    <button onclick="checkElementTypeAtIndex()">Check Element Type at Index</button>
+    <div id="elementTypeOutput"></div>
+    <br>
+
+    <div id="arrayOutput"></div>
+    <br>
+
+    <button onclick="createAndDisplayTable()">Create Table</button>
+    <button onclick="resetArray()">Reset</button>
+    <div id="arrayLengthMessage"></div><br><br>
+
+    <h3>Array Elements and Data Types</h3>
+    <table id="arrayTable">
+        <thead>
+            <tr>
+                <th>Element</th>
+                <th>Data Type</th>
+                <th>Is Array?</th>
+            </tr>
+        </thead>
+        <tbody id="arrayTableBody"></tbody>
+    </table>
+
+    <script>
+        let userArray = [];
+
+        function addObjectOrArray() {
+            const input = document.getElementById("objectArrayInput").value;
+            const arrayLengthInput = document.getElementById("arrayLengthInput").value;
+            const arrayLength = parseInt(arrayLengthInput, 10);
+
+            if (userArray.length >= arrayLength) {
+                document.getElementById("arrayLengthMessage").innerHTML = "Array length exceeded.";
+                return;
+            }
+
+            try {
+                const parsedInput = JSON.parse(input);
+                userArray.push(parsedInput);
+            } catch (error) {
+                userArray.push(input);
+            }
+
+            displayArray();
+            clearInputFields(); 
+        }
+
+        function clearInputFields() {
+            document.getElementById("objectArrayInput").value = "";
+            document.getElementById("isArrayIndex").value = "";
+        }
+
+        function checkElementTypeAtIndex() {
+            const index = document.getElementById("isArrayIndex").value;
+            const element = userArray[index];
+            const elementType = typeof element;
+            const isArray = Array.isArray(element);
+            const elementTypeOutput = document.getElementById("elementTypeOutput");
+            elementTypeOutput.innerHTML = `Element at index ${index} is of type: ${elementType}, Is Array: ${isArray}`;
+        }
+
+        function createAndDisplayTable() {
+            const tableBody = document.getElementById("arrayTableBody");
+            tableBody.innerHTML = "";
+
+            for (let i = 0; i < userArray.length; i++) {
+                const element = userArray[i];
+                const elementType = typeof element;
+                const isArray = Array.isArray(element);
+
+                const row = `<tr><td>${Array.isArray(element) ? `[${element}]` : JSON.stringify(element)}</td><td>${elementType}</td><td>${isArray}</td></tr>`;
+                tableBody.innerHTML += row;
+            }
+        }
+
+        function resetArray() {
+            userArray = [];
+            displayArray();
+        }
+
+        function displayArray() {
+            const arrayOutputDiv = document.getElementById("arrayOutput");
+            arrayOutputDiv.innerHTML = `Array: [${userArray.map(obj => Array.isArray(obj) ? `[${obj}]` : JSON.stringify(obj)).join(', ')}]`;
+
+            document.getElementById("arrayLengthMessage").innerHTML = "";
+        }
+    </script>
+</body>
+</html>

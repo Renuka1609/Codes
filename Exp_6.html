@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+</head>
+<body style="text-align: center;">
+    <h1>Array Operations</h1>
+    <input type="number" id="arrayLength" placeholder="Array Length">
+    <br>
+    <br>
+    <input type="text" id="inputArray" placeholder="Input Array (comma-separated)">
+    <br>
+    <br>
+    <button onclick="createArray()">Create Array</button>
+    <br>
+    <br>
+    <input type="text" id="removeElementIB" placeholder="Remove Element">
+    <br>
+    <br>
+    <button onclick="removeFromArrayIB()">Remove Element (In-built)</button>
+    <br>
+    <br>
+    <input type="text" id="removeElementUD" placeholder="Remove Element">
+    <br>
+    <br>
+    <button onclick="removeFromArrayUD()">Remove Element (User defined)</button>
+    <br>
+    <br>
+    <input type="text" id="checkValueIB" placeholder="Element to check">
+    <br>
+    <br>
+    <button onclick="checkValueIB()">Search Element (In-built)</button>
+    <br>
+    <br>
+    <input type="text" id="checkValueUD" placeholder="Element to check">
+    <br>
+    <br>
+    <button onclick="checkValueUD()">Search Element (User defined)</button>
+    <br>
+    <br>
+    <p>Output Array: <span id="arrayResult"></span></p>
+    <p>Checked value: <span id="containsResult"></span></p>
+    <button onclick="emptyArrayIB()">Empty Array (In-built)</button>
+    <br>
+    <br>
+    <button onclick="emptyArrayUD()">Empty Array (User defined)</button>
+    <br>
+    <br>
+    <button onclick="resetFields()">Reset</button>
+
+    <script>
+        var inputArray = [];
+        
+        function createArray() {
+    var arrayLength = parseInt(document.getElementById("arrayLength").value);
+    var inputElement = document.getElementById("inputArray").value;
+    var elements = inputElement.split(",");
+
+    if (elements.length === arrayLength) {
+        inputArray = elements;
+        document.getElementById("arrayResult").innerHTML = "[" + inputArray.join(', ') + "]"; // Display the array within square brackets
+    } else {
+        document.getElementById("arrayResult").innerHTML = "Invalid Input: Number of elements should match the specified length.";
+    }
+}
+
+
+        function removeFromArrayIB() {
+    var removeElement = document.getElementById("removeElementIB").value;
+    var indexofElement = inputArray.indexOf(removeElement);
+
+    if (indexofElement !== -1) {
+        inputArray.splice(indexofElement, 1);
+        document.getElementById("arrayResult").innerHTML = inputArray.join(', ');
+    } else {
+        document.getElementById("arrayResult").innerHTML = "Element not found in the array.";
+    }
+}
+
+        function removeFromArrayUD() {
+            var removeElement = document.getElementById("removeElementUD").value;
+            var i = 0;
+            var found = false;
+
+            while (i < inputArray.length) {
+                if (inputArray[i] === removeElement) {
+                    inputArray.splice(i, 1);
+                    found = true;
+                   
+                } else {
+                    i++;
+                }
+            }
+
+            if (found) {
+                document.getElementById("arrayResult").innerHTML = inputArray.join(', ');
+            } else {
+                document.getElementById("arrayResult").innerHTML = "Element not found in the array.";
+            }
+        }
+
+
+        function checkValueIB() {
+            const checkValue = document.getElementById("checkValueIB").value;
+            var i = inputArray.indexOf(checkValue);
+
+            if (i !== -1) {
+                document.getElementById("containsResult").innerHTML = "Element Found at Index Position: " + i;
+            } else {
+                document.getElementById("containsResult").innerHTML = "Element not found";
+            }
+        }
+
+        function checkValueUD() {
+            var checkValue = document.getElementById("checkValueUD").value;
+            var i = 0;
+            var checkFlag = 0;
+
+            while (i < inputArray.length) {
+                if (inputArray[i] === checkValue) {
+                    checkFlag = 1;
+                    break;
+                }
+                i++;
+            }
+
+            if (checkFlag === 1) {
+                document.getElementById("containsResult").innerHTML = "Element Found at Index Position: " + i;
+            } else {
+                document.getElementById("containsResult").innerHTML = "Element not found";
+            }
+        }
+
+        function emptyArrayIB() {
+    inputArray = [];
+    document.getElementById("arrayResult").innerHTML = "[]"; // Display empty square brackets
+}
+
+function emptyArrayUD() {
+    inputArray = [];
+    document.getElementById("arrayResult").innerHTML = "[]"; // Display empty square brackets
+}
+
+
+        function resetFields() {
+            document.getElementById("inputArray").value = "";
+            document.getElementById("removeElementIB").value = "";
+            document.getElementById("removeElementUD").value = "";
+            document.getElementById("checkValueIB").value = "";
+            document.getElementById("checkValueUD").value = "";
+            document.getElementById("arrayResult").innerHTML = "";
+            document.getElementById("containsResult").innerHTML = "";
+            inputArray = [];
+        }
+    </script>
+</body>
+</html>

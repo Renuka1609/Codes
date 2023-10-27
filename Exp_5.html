@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exp5</title>
+  <style>
+    body {
+      text-align: center;
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: red;
+    }
+
+    input[type="datetime-local"] {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    #countdown {
+      font-size: 24px;
+      font-weight: bold;
+      color: red;
+    }
+
+    #resetButton {
+      padding: 10px;
+      background-color: #0074d9;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <h1>Calculate Difference</h1>
+    <p>Select a future date and time: <input type="datetime-local" id="futureDateTimeInput"></p>
+    <div id="countdown"></div>
+    <button id="resetButton">Reset</button>
+  </center>
+
+  <script>
+    class DateCountdown {
+      constructor(futureDateTimeString) {
+        this.futureDate = new Date(futureDateTimeString);
+        this.updateCountdown();
+        this.interval = setInterval(this.updateCountdown.bind(this), 1000);
+      }
+
+      updateCountdown() {
+        const currentDate = new Date();
+        const timeDifference = this.futureDate - currentDate;
+        if (timeDifference <= 0) {
+          clearInterval(this.interval);
+          document.getElementById('countdown').textContent = 'Time has passed!';
+          return;
+        }
+        const secondsDifference = Math.floor(timeDifference / 1000);
+        const remainingSeconds = secondsDifference % 60;
+        const remainingMinutes = Math.floor(secondsDifference / 60) % 60;
+        const remainingHours = Math.floor(secondsDifference / 3600) % 24;
+        const remainingDays = Math.floor(secondsDifference / 86400);
+        const formattedResult = `<h1><strong>${remainingDays} D: ${remainingHours} H: ${remainingMinutes} M: ${remainingSeconds} S</strong></h1>`;
+        document.getElementById('countdown').innerHTML = formattedResult;
+      }
+    }
+
+    const futureDateTimeInput = document.getElementById('futureDateTimeInput');
+    const resetButton = document.getElementById('resetButton');
+    let countdown;
+
+    futureDateTimeInput.addEventListener('change', () => {
+      const futureDateTimeString = futureDateTimeInput.value;
+      if (countdown) {
+        clearInterval(countdown.interval);
+      }
+      countdown = new DateCountdown(futureDateTimeString);
+    });
+
+    resetButton.addEventListener('click', () => {
+      if (countdown) {
+        clearInterval(countdown.interval);
+        document.getElementById('countdown').textContent = '';
+        futureDateTimeInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>

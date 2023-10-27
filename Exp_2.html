@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplication Table</title>
+  <style>
+    body {
+      text-align: center;
+      background-color: #fcfcfc;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+
+    input[type="number"] {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #0074d9;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    p {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    span {
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <h1>Multiplication Table</h1>
+
+  <label for="Given1">Enter a number for For Loop:</label>
+  <input type="number" id="Given1" placeholder="Enter a number">
+  <br><br>
+  <label for="Given2">Enter a number for While Loop:</label>
+  <input type="number" id="Given2" placeholder="Enter a number">
+  <br><br>
+  <label for "Given3">Enter a number for Do-While Loop:</label>
+  <input type="number" id="Given3" placeholder="Enter a number">
+  <br><br>
+  <button onclick="tablE()">Click Here For the For Loop Table</button>
+  <p>Multiplication Table using For Loop:<br> <span id="displayf"></span></p>
+  <button onclick="tablW()">Click Here For the While Loop Table </button>
+  <p>Multiplication Table using While Loop:<br> <span id="displayw"></span></p>
+  <button onclick="tablD()">Click Here For the Do-While Loop Table </button>
+  <p>Multiplication Table using Do-While Loop:<br> <span id="displayd"></span></p>
+
+  <script>
+    function tablE() {
+      let num = parseInt(document.getElementById("Given1").value);
+
+      // if (isNaN(num) || num <= 0) {
+      //   alert("Please enter a valid positive number.");
+      //   return;
+      // }
+
+      let sentence = "";
+      for (let i = 1; i <= 10; i++) {
+        let final = num * i;
+        sentence += `${num} X ${i} = ${final} <br/>`;
+      }
+      document.getElementById("displayf").innerHTML = sentence;
+    }
+
+    function tablW() {
+      var num = parseInt(document.getElementById("Given2").value);
+
+      // if (isNaN(num) || num <= 0) {
+      //   alert("Please enter a valid positive number.");
+      //   return;
+      // }
+
+      var resultW = "";
+      var i = 1;
+      while (i <= 10) {
+        resultW += num + " x " + i + " = " + num * i + "<br>";
+        i++;
+      }
+      document.getElementById("displayw").innerHTML = resultW;
+    }
+
+    function tablD() {
+      var num = parseInt(document.getElementById("Given3").value);
+
+      // if (isNaN(num) || num <= 0) {
+      //   alert("Please enter a valid positive number.");
+      //   return;
+      // }
+
+      var resultD = "";
+      var j = 1;
+      do {
+        resultD += num + " x " + j + " = " + num * j + "<br>";
+        j++;
+      } while (j <= 10);
+      document.getElementById("displayd").innerHTML = resultD;
+    }
+  </script>
+</body>
+</html>
