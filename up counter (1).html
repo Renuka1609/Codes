@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Up Time Counter</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #uptime {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #startTime {
+      font-size: 16px;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    #startButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Up Time Counter</h1>
+
+  <div id="uptime">0 seconds</div>
+  <div id="startTime"></div>
+  <button id="startButton" onclick="startCounting()">Start Counting</button>
+
+  <script>
+    var startTime;
+
+    function startCounting() {
+      // Set the start time when the button is clicked
+      startTime = new Date();
+      document.getElementById('startTime').innerText = 'Started at: ' + startTime.toLocaleString();
+
+      // Update the uptime every second
+      setInterval(updateUptime, 1000);
+    }
+
+    function updateUptime() {
+      // Check if the start time is defined
+      if (!startTime) {
+        return;
+      }
+
+      // Get the current time
+      var currentTime = new Date();
+
+      // Calculate the time difference since the page was loaded
+      var timeDifference = currentTime - startTime;
+
+      // Convert the time difference to seconds
+      var uptimeInSeconds = Math.floor(timeDifference / 1000);
+
+      // Update the uptime display
+      document.getElementById('uptime').innerText = uptimeInSeconds + ' seconds';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        input, button {
+            margin: 5px;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Array Operations</h1>
+
+    <div>
+        <label for="arrayLength">Enter the length of the array:</label>
+        <input type="number" id="arrayLength">
+        <button onclick="takeArrayInput()">Create Array</button>
+    </div>
+
+    <div id="output"></div>
+
+    <div>
+        <label for="appendIndex">Enter the index to append the element:</label>
+        <input type="number" id="appendIndex">
+        <label for="newElement">Enter the element to append:</label>
+        <input type="text" id="newElement">
+        <button onclick="appendElement()">Append Element</button>
+    </div>
+
+    <div>
+        <label for="substringInput">Enter the string to check for substring:</label>
+        <input type="text" id="substringInput">
+        <button onclick="checkSubstring()">Check Substring</button>
+    </div>
+
+    <script>
+        let newArray = [];
+
+        function takeArrayInput() {
+            const arrayLengthInput = document.getElementById("arrayLength");
+            const arrayLength = parseInt(arrayLengthInput.value, 10);
+
+            if (!isNaN(arrayLength) && arrayLength > 0) {
+                newArray = [];
+                for (let i = 0; i < arrayLength; i++) {
+                    const element = prompt(`Enter element at index ${i}:`);
+                    newArray.push(element);
+                }
+
+                displayOutput(`Array created: [${newArray.join(', ')}]`);
+            } else {
+                displayOutput("Please enter a valid positive integer for array length.");
+            }
+        }
+
+        function appendElement() {
+            const appendIndexInput = document.getElementById("appendIndex");
+            const newElementInput = document.getElementById("newElement");
+
+            const arrayIndex = parseInt(appendIndexInput.value, 10);
+            const newElement = newElementInput.value;
+
+            if (!isNaN(arrayIndex) && arrayIndex >= 0 && arrayIndex <= newArray.length) {
+                newArray.splice(arrayIndex, 0, newElement);
+                displayOutput(`Array after appending element: [${newArray.join(', ')}]`);
+            } else {
+                displayOutput("Invalid index. Please enter a valid index.");
+            }
+        }
+
+        function checkSubstring() {
+            const substringInput = document.getElementById("substringInput").value;
+            const containsSubstring = newArray.some(element => element.includes(substringInput));
+
+            if (containsSubstring) {
+                displayOutput(`Array contains a substring of "${substringInput}"`);
+            } else {
+                displayOutput(`Array does not contain a substring of "${substringInput}"`);
+            }
+        }
+
+        function displayOutput(message) {
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = `<p>${message}</p>`;
+        }
+    </script>
+</body>
+</html>

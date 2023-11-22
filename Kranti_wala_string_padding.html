@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        Enter string <input type="text" id="s1">
+        <br><br>
+        <button onclick="changec()">change case</button>
+        <br><br>
+        <p id="opcase"></p>
+        <br><br>
+        <button onclick="padstart()">pad char</button>
+        <br><br>
+        <p id="oppad"></p>
+        <br>
+        <br>
+        <button onclick="splitstr()">split</button>
+        <br><br>
+        <p id="opsplit"></p>
+        <br><br>
+    </center>
+    <script>
+        function changec(){
+            var s1=document.getElementById("s1").value 
+            var opl=s1.toLowerCase()
+            var opu=s1.toUpperCase()
+            document.getElementById("opcase").innerHTML="Lower case - "+opl+"<br>"+"Upper case - "+opu
+        }
+        function padstart(){
+            var s1=document.getElementById("s1").value 
+            var opl=s1.padStart(8,3)
+            
+            document.getElementById("oppad").innerHTML=opl
+        }
+        function splitstr(){
+            var s1=document.getElementById("s1").value 
+            var opl=s1.split('')
+            
+            document.getElementById("opsplit").innerHTML=opl
+        }
+    </script>
+</body>
+</html>
